@@ -1,3 +1,5 @@
+Video Link - https://www.youtube.com/watch?v=6ovZgNyqTNE
+
 # Next Gen Indian Banking Website with Voice Assistant Integration
 
 This project integrates a LangGraph-powered AI voice assistant into a Next Gen banking website.
