@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Gen Indian Banking - Internet Banking</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="bank-logo">
+                <img src="nextgen-logo.png" alt="Next Gen Logo" onerror="this.style.display='none'">
+                <h1 data-translate="bankName">Next Gen Indian Banking</h1>
+            </div>
+            <nav class="nav">
+                <a href="#home" data-translate="home">Home</a>
+                <a href="#services" data-translate="services">Services</a>
+                <a href="#accounts" data-translate="accounts">Accounts</a>
+                <a href="#loans" data-translate="loans">Loans</a>
+                <a href="#help" data-translate="help">Help</a>
+            </nav>
+            <div class="header-actions">
+                <div class="language-selector">
+                    <button class="btn-language" onclick="toggleLanguageMenu()">
+                        <i class="fas fa-language"></i> <span id="currentLang">English</span> <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="languageMenu" class="language-menu hidden">
+                        <button onclick="changeLanguage('en')" class="lang-option" data-lang="en">
+                            <span class="lang-flag">🇬🇧</span>
+                            <span class="lang-name">English</span>
+                        </button>
+                        <button onclick="changeLanguage('hi')" class="lang-option" data-lang="hi">
+                            <span class="lang-flag">🇮🇳</span>
+                            <span class="lang-name">हिंदी</span>
+                            <span class="lang-name-en">(Hindi)</span>
+                        </button>
+                        <button onclick="changeLanguage('gu')" class="lang-option" data-lang="gu">
+                            <span class="lang-flag">🇮🇳</span>
+                            <span class="lang-name">ગુજરાતી</span>
+                            <span class="lang-name-en">(Gujarati)</span>
+                        </button>
+                    </div>
+                </div>
+                <button class="btn-secondary" onclick="showLogin()" data-translate="login">Login</button>
+                <button class="btn-primary" onclick="toggleVoiceBot()">
+                    <i class="fas fa-microphone"></i> <span data-translate="voiceAssistant">Voice Assistant</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-translate="heroTitle">Welcome to Next Gen Internet Banking</h1>
+                <p data-translate="heroSubtitle">Experience secure, fast, and intelligent banking with our AI-powered voice assistant</p>
+                <div class="hero-actions">
+                    <button class="btn-large btn-primary" onclick="showLogin()">
+                        <i class="fas fa-sign-in-alt"></i> <span data-translate="loginToAccount">Login to Account</span>
+                    </button>
+                    <button class="btn-large btn-voice" onclick="toggleVoiceBot()">
+                        <i class="fas fa-microphone"></i> <span data-translate="tryVoiceAssistant">Try Voice Assistant</span>
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="floating-card">
+                    <i class="fas fa-robot"></i>
+                    <h3 data-translate="aiVoiceBanking">AI Voice Banking</h3>
+                    <p data-translate="aiVoiceDesc">Just speak naturally to check balance, transfer funds, or get loan information</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 data-translate="ourServices">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-wallet"></i>
+                    <h3 data-translate="accountManagement">Account Management</h3>
+                    <p data-translate="accountManagementDesc">Check balance, view statements, and manage your accounts</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-exchange-alt"></i>
+                    <h3 data-translate="fundTransfer">Fund Transfer</h3>
+                    <p data-translate="fundTransferDesc">NEFT, RTGS, IMPS, and UPI transfers</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-credit-card"></i>
+                    <h3 data-translate="creditCards">Credit Cards</h3>
+                    <p data-translate="creditCardsDesc">Apply for cards, pay bills, and track rewards</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-home"></i>
+                    <h3 data-translate="loansService">Loans</h3>
+                    <p data-translate="loansServiceDesc">Home loans, personal loans, and more</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3 data-translate="investments">Investments</h3>
+                    <p data-translate="investmentsDesc">Mutual funds, fixed deposits, and insurance</p>
+                </div>
+                <div class="service-card highlight">
+                    <i class="fas fa-microphone-alt"></i>
+                    <h3 data-translate="voiceBanking">Voice Banking</h3>
+                    <p data-translate="voiceBankingDesc">AI-powered voice assistant for hands-free banking</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Voice Bot Widget -->
+    <div id="voiceBot" class="voice-bot hidden">
+        <div class="voice-bot-header">
+            <div class="bot-info">
+                <div class="bot-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div>
+                    <h3 data-translate="voiceAssistantTitle">Next Gen Voice Assistant</h3>
+                    <p class="bot-status" id="botStatus" data-translate="ready">Ready to help</p>
+                </div>
+            </div>
+            <div class="bot-controls">
+                <button class="btn-icon" onclick="minimizeBot()">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button class="btn-icon" onclick="toggleVoiceBot()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="voice-bot-content" id="chatContent">
+            <div class="welcome-message">
+                <div class="bot-message">
+                    <i class="fas fa-robot"></i>
+                    <div class="message-bubble">
+                        <p>Hello! I'm your Next Gen Voice Assistant. You can ask me about:</p>
+                        <ul>
+                            <li>Account balance</li>
+                            <li>Recent transactions</li>
+                            <li>Fund transfers</li>
+                            <li>Loan information</li>
+                            <li>Credit card details</li>
+                        </ul>
+                        <p>Try saying: "What's my account balance?" or click the microphone to start!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="voice-bot-footer">
+            <div class="voice-controls">
+                <button id="voiceBtn" class="btn-voice-record" onclick="toggleVoiceRecording()">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <div class="voice-indicator" id="voiceIndicator">
+                    <div class="pulse-ring"></div>
+                </div>
+            </div>
+            <div class="input-area">
+                <input type="text" id="textInput" placeholder="Type your message or use voice..." 
+                       onkeypress="handleTextInput(event)">
+                <button class="btn-send" onclick="sendTextMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" onclick="closeLogin()">&times;</span>
+            <h2>Login to Next Gen Internet Banking</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Username / Customer ID</label>
+                    <input type="text" id="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+                <div class="form-options">
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn-primary btn-block">Login</button>
+            </form>
+            <div class="login-alternative">
+                <p>Or login with voice authentication</p>
+                <button class="btn-secondary" onclick="startVoiceAuth()">
+                    <i class="fas fa-microphone"></i> Voice Login
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Section (shown after login) -->
+    <section id="dashboard" class="dashboard hidden">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2><span data-translate="welcomeBack">Welcome back</span>, <span id="userName">John Doe</span></h2>
+                <button class="btn-secondary" onclick="logout()" data-translate="logout">Logout</button>
+            </div>
+            
+            <div class="dashboard-grid">
+                <!-- Account Summary -->
+                <div class="dashboard-card">
+                    <h3 data-translate="accountSummary">Account Summary</h3>
+                    <div class="account-info">
+                        <p data-translate="savingsAccount">Savings Account</p>
+                        <h2 id="accountBalance">₹15,750.50</h2>
+                        <p class="account-number"><span data-translate="accountNumber">A/C</span>: ****6789</p>
+                    </div>
+                    <button class="btn-primary" onclick="askVoiceBot('What is my account balance?')">
+                        <i class="fas fa-microphone"></i> <span data-translate="askVoiceAssistant">Ask Voice Assistant</span>
+                    </button>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="dashboard-card">
+                    <h3 data-translate="quickActions">Quick Actions</h3>
+                    <div class="quick-actions">
+                        <button onclick="askVoiceBot('Show my recent transactions')">
+                            <i class="fas fa-history"></i> <span data-translate="viewTransactions">View Transactions</span>
+                        </button>
+                        <button onclick="askVoiceBot('I want to transfer funds')">
+                            <i class="fas fa-exchange-alt"></i> <span data-translate="transferMoney">Transfer Funds</span>
+                        </button>
+                        <button onclick="askVoiceBot('Tell me about my loan')">
+                            <i class="fas fa-home"></i> <span data-translate="checkLoans">Check Loans</span>
+                        </button>
+                        <button onclick="askVoiceBot('What is my credit limit?')">
+                            <i class="fas fa-credit-card"></i> <span data-translate="creditCard">Credit Card</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="dashboard-card full-width">
+                    <h3 data-translate="recentTransactions">Recent Transactions</h3>
+                    <div class="transactions-list" id="transactionsList">
+                        <div class="transaction-item">
+                            <div class="transaction-icon debit">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <p class="transaction-desc">Grocery Store</p>
+                                <p class="transaction-date">20 Nov 2025</p>
+                            </div>
+                            <div class="transaction-amount debit">-₹150.00</div>
+                        </div>
+                        <div class="transaction-item">
+                            <div class="transaction-icon credit">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <p class="transaction-desc">Salary Deposit</p>
+                                <p class="transaction-date">18 Nov 2025</p>
+                            </div>
+                            <div class="transaction-amount credit">+₹3,000.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-translate="aboutBank">About Next Gen</h4>
+                    <ul>
+                        <li><a href="#" data-translate="aboutUs">About Us</a></li>
+                        <li><a href="#" data-translate="corporateInfo">Corporate Info</a></li>
+                        <li><a href="#" data-translate="careers">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-translate="support">Support</h4>
+                    <ul>
+                        <li><a href="#" data-translate="helpCenter">Help Center</a></li>
+                        <li><a href="#" data-translate="contactUs">Contact Us</a></li>
+                        <li><a href="#" data-translate="faqs">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-translate="security">Security</h4>
+                    <ul>
+                        <li><a href="#" data-translate="securityTips">Security Tips</a></li>
+                        <li><a href="#" data-translate="privacyPolicy">Privacy Policy</a></li>
+                        <li><a href="#" data-translate="termsConditions">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-translate="contact">Contact</h4>
+                    <p><i class="fas fa-phone"></i> 1800-425-3800</p>
+                    <p><i class="fas fa-envelope"></i> support@sbi.co.in</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 <span data-translate="bankName">Next Gen Indian Banking</span>. <span data-translate="rights">All rights reserved</span> | <span data-translate="poweredBy">Powered by AI Voice Assistant</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeLogin()">&times;</span>
+            <div class="login-header">
+                <i class="fas fa-user-circle"></i>
+                <h2 data-translate="loginTitle">SBI Internet Banking Login</h2>
+                <p data-translate="loginSubtitle">Enter your credentials to access your account</p>
+            </div>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">
+                        <i class="fas fa-user"></i> <span data-translate="username">Username</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        placeholder="Enter your username"
+                        required
+                    >
+                    <small class="form-hint">Demo users: neha or niyati</small>
+                </div>
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i> <span data-translate="password">Password</span>
+                    </label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Enter your password"
+                        required
+                    >
+                    <small class="form-hint">Demo passwords: neha123 or niyati123</small>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="remember"> <span data-translate="rememberMe">Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-link" data-translate="forgotPassword">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-sign-in-alt"></i> <span data-translate="loginButton">Login</span>
+                </button>
+                <div class="demo-notice" style="margin-top: 15px; padding: 10px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;">
+                    <p style="margin: 0; font-size: 13px; color: #856404;">
+                        <i class="fas fa-info-circle"></i> 
+                        <strong>Demo Note:</strong> Browser may show password breach warning for demo accounts. This is expected and safe to ignore for testing purposes.
+                    </p>
+                </div>
+            </form>
+            <div class="login-footer">
+                <p><span data-translate="dontHaveAccount">Don't have an account?</span> <a href="#" data-translate="registerNow">Register Now</a></p>
+                <p class="security-note">
+                    <i class="fas fa-shield-alt"></i> 
+                    <span data-translate="securityNote">Your connection is secured with 256-bit SSL encryption</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="translations.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
